@@ -30,6 +30,7 @@ const MainComponent = () => {
 
   const postDelete = (id) => {
     setPosts(posts.filter((post) => post.id !== id));
+    alert ("Post eliminato con successo!");
   };
   
   return (
@@ -52,16 +53,22 @@ const MainComponent = () => {
       </h1>
       {/* cards */}
       <div className="container d-flex flex-wrap justify-content-center align-items-center">
-        {posts.map((post) => (
-          <CardComponent
-          key={post.id}
-          title={post.title}
-          image={null}
-          content={post.content}
-          tags={post.tags}
-          cardDelete={postDelete}
-          />
-        ))}
+        { posts.length > 0 ?
+          posts.map((post) => (
+            <CardComponent
+            key={post.id}
+            title={post.title}
+            image={null}
+            content={post.content}
+            tags={post.tags}
+            cardDelete={() => postDelete(post.id)}
+            />
+          ))
+          :
+          <p className="p-5 fs-4 text-center text-light">
+            Non ci sono post
+          </p>
+        }
       </div>
       {/* form */}
       <div className="container py-4">

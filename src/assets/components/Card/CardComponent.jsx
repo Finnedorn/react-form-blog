@@ -31,7 +31,7 @@ const CardComponent = ({title, image, content, tags, cardDelete}) => {
                     ))}
                 </div>
                 <div className="pt-3">
-                    <button className="btn btn-danger" onClick={() => {cardDelete}}>
+                    <button className="btn btn-danger" onClick={cardDelete}>
                         <MdDelete />
                     </button>
                 </div>
