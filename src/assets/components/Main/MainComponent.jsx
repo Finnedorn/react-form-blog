@@ -5,6 +5,8 @@ import { useState } from "react";
 const MainComponent = () => {
 
   const [posts, setPosts] = useState([]);
+  const [newTitle, setNewTitle] = useState('');
+  const [newContent, setNewContent] = useState('');
   const [postData, setPostData] = useState({
     title: "",
     content: "",
@@ -32,6 +34,23 @@ const MainComponent = () => {
     setPosts(posts.filter((post) => post.id !== id));
     alert ("Post eliminato con successo!");
   };
+
+  const postEdit = (id, newTitle, newContent) => {
+    console.log(id, newTitle, newContent);
+    setPosts((prevPosts) => {
+      return prevPosts.map((post) => {
+        if (post.id === id) {
+          return {
+            ...post,
+            title: newTitle,
+            content: newContent,
+          };
+        } else {
+          return post;
+        }
+      });
+    })
+  };
   
   return (
     <main
@@ -57,11 +76,13 @@ const MainComponent = () => {
           posts.map((post) => (
             <CardComponent
             key={post.id}
+            id={post.id}
             title={post.title}
             image={null}
             content={post.content}
             tags={post.tags}
             cardDelete={() => postDelete(post.id)}
+            cardEdit={postEdit}
             />
           ))
           :
@@ -92,9 +113,9 @@ const MainComponent = () => {
                 <h4 className="mt-3">
                   Descrizione
                 </h4>
-                <input
+                <textarea
                 className="form-control"
-                type="textarea"
+                type="text"
                 rows="5"
                 cols="50"
                 value={postData.content}

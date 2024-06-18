@@ -10,7 +10,8 @@
     background-color: #fff;
     border-radius: 0.5rem;
     overflow: hidden;
-    max-width: 600px;    
+    max-width: 600px;
+    height: 100%;    
 }
 
 .cardImg {
@@ -19,6 +20,7 @@
 }
 
 .cardBody {
+    min-height: 265px;
     padding: 30px;
     display: flex;
     flex-direction: column;
